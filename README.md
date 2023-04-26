@@ -27,5 +27,3 @@
 7.  部署教程：https://blog.csdn.net/qq_57421630/article/details/130040548
 8.  项目后端版本：https://gitee.com/aniu-666/chat-gpt-website/tree/master/
 #### 项目效果
-
-![输入图片说明](示例图.png)
