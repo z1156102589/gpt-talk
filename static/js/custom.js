@@ -80,17 +80,17 @@ $(document).ready(function() {
     chatWindow.append(messageElement);
     chatWindow.animate({ scrollTop: chatWindow.prop('scrollHeight') }, 500);
   }
-  
+
   // 处理用户输入
   chatBtn.click(function() {
     // 解绑键盘事件
     chatInput.off("keydown",handleEnter);
-    
+
     // 保存api key与对话数据
     var data = {
-      "apiKey" : "", // 这里填写固定 apiKey
+      "apiKey" : localStorage.getItem('apiKey'), // 这里填写固定 apiKey
     }
-   
+
     // 判断是否使用自己的api key
     if ($(".key .ipt-1").prop("checked")){
       var apiKey = $(".key .ipt-2").val();
@@ -102,9 +102,9 @@ $(document).ready(function() {
           })
           return
       }else{
-        data.apiKey = apiKey
+        data.apiKey = apiKey;
+        localStorage.setItem('apiKey', apiKey);
       }
-
     }
 
     var message = chatInput.val();
@@ -146,7 +146,7 @@ $(document).ready(function() {
       }),
       success: function(res) {
         const resp = res["choices"][0]["message"];
-       
+
         addMessage(resp.content,"chatgpt.png");
         // 收到回复，让按钮可点击
         chatBtn.attr('disabled',false)
@@ -173,7 +173,7 @@ $(document).ready(function() {
 
   // 绑定Enter键盘事件
   chatInput.on("keydown",handleEnter);
-  
+
   // 禁用右键菜单
   document.addEventListener('contextmenu',function(e){
     e.preventDefault();  // 阻止默认事件
